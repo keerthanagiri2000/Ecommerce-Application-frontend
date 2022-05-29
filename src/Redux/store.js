@@ -43,7 +43,7 @@ const store = configureStore({
         },
         userLogin: {userInfo: userInfoFromLocalStorage},
     },
-    
+    middleware,
 });
   
 

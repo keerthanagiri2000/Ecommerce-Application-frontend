@@ -6,8 +6,8 @@ import { PRODUCT_DETAILS_FAIL, PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS 
 export const listProduct = () => async(dispatch) => {
     try {
         dispatch({type: PRODUCT_LIST_REQUEST});
-                                                            //api/products
-        const {data} = await axios.get("/");
+                                                            
+        const {data} = await axios.get("/api/products");
         dispatch ({type: PRODUCT_LIST_SUCCESS, payload:data});
 
         }catch(error) {
