@@ -1,0 +1,1 @@
+export const API="https://ecommerce-application-node.herokuapp.com";
