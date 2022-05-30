@@ -1,14 +1,14 @@
 import React, {useEffect} from "react";
 import Header from "../Header";
-import {Link, useParams, useNavigate} from "react-router-dom";
+import {Link, useParams, useNavigate, useLocation} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removefromcart } from "../Redux/Actions/CartActions";
-
 
 const Cart = () => {
     window.scrollTo(0, 0);
     const dispatch = useDispatch();
     const history = useNavigate();
+    const location = useLocation();
     const {id} = useParams();
     const productId = id ;
     const qty = location.search ? Number(location.search.split("=")[1]) : 1;

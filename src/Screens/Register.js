@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useLocation} from "react-router-dom";
 import Header from "../Header";
 import Message from "../LoadingError/Error";
 import Loading from "../LoadingError/Loading";
@@ -16,6 +16,7 @@ const Register = () => {
     const [password, setPassword] = useState("");
 
     const dispatch = useDispatch();
+    const location = useLocation();
 
     const redirect = location.search ? location.search.split("=")[1]:"/" ;
 
