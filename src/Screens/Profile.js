@@ -5,6 +5,7 @@ import Orders from "../Profile/Orders";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserDetails } from "../Redux/Actions/UserActions";
 import moment from "moment";
+import { listMyOrders } from "../Redux/Actions/OrderActions";
 
 const Profile = () => {
     window.scrollTo(0, 0);
@@ -14,7 +15,11 @@ const Profile = () => {
     const userLogin = useSelector((state) => state.userLogin);
     const {userInfo} = userLogin;
 
+    const orderList = useSelector((state) => state.orderList);
+    const { loading, error, orders } = orderList;
+
     useEffect(() => {
+      dispatch(listMyOrders("profile"));
       dispatch(getUserDetails("profile"));
     }, [dispatch]);
     return (
@@ -68,11 +73,11 @@ const Profile = () => {
                                     type="button"
                                     role="tab"
                                     aria-controls="v-pills-profile"
-                                    /*aria-selected="false"*/
+                                    aria-selected="false"
                                   > 
                                    
                                     Orders List
-                                    <span className="badge2">3</span>
+                                    <span className="badge2">{orders ? orders.length : 0}</span>
                                   </button>
                                   
                                 </div>
@@ -82,24 +87,12 @@ const Profile = () => {
 
                     <div class="tab-content col-lg-8 pb-5 pt-lg-0 pt-3" id="v-pills-tabContent">
                       <div className="tab-pane fade active show" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                        <div>
-                            <div className="Toastify"></div>
-                            <div className="Toastify"></div>
-                        </div>
                         <ProfileTabs />
                       </div> 
 
-                      <div className="tab-pane fade active show" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                      <div className="d-flex justify-content-center align-items-center">
-                          <div className="col-12 alert alert-info text-center mt-3">
-                              No Orders
-                              <a className="btn btn-success mx-2 px-3 py-2" href="/" style={{fontSize:"12px"}}>START SHOPPING</a>
-
-                          </div>
-               
-                      </div>
+                      <div className="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                        <Orders orders={orders} loading={loading} error={error} />
                       </div> 
-                      
                     </div>
                 </div>
             </div>
@@ -108,9 +101,3 @@ const Profile = () => {
 };
 
 export default Profile;
-
-
-
-
-
-//{userInfo.name}

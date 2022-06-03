@@ -1,4 +1,5 @@
-import axios from "axios"
+import axios from "axios";
+import {API} from "./data.js";
 import { CART_ADD_ITEM, 
     CART_PAYMENT_METHOD, 
     CART_REMOVE_ITEM, 
@@ -8,7 +9,7 @@ import { CART_ADD_ITEM,
 
 //ADD TO CART
 export const addToCart = (id, qty) => async(dispatch, getState) => {
-    const {data} = await axios.get(`/api/products/${id}`);
+    const {data} = await axios.get(`${API}/api/products/${id}`);
 
     dispatch({
         type:CART_ADD_ITEM,

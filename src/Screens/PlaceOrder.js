@@ -188,7 +188,7 @@ const PlaceOrder = () => {
             </table>
             {
               cart.cartItems.length === 0 ? null : (
-                <button  type="submit"  className="placeorder-btn">
+                <button  type="submit" onClick={ placeOrderHandler} className="placeorder-btn">
                   PLACE ORDER
                 </button>
               )}

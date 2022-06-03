@@ -2,11 +2,17 @@ import {applyMiddleware} from "redux";
 import { configureStore,combineReducers } from '@reduxjs/toolkit';
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "@redux-devtools/extension";
-import { productDetailsReducer,productListReducer } from "./Reducers/ProductReducers";
+import { productCreateReviewReducer, productDetailsReducer,productListReducer } from "./Reducers/ProductReducers";
 import { cartReducer } from "./Reducers/CartReducers";
 import { userDetailsReducer, userLoginReducer, userRegisterReducer, userUpdateProfileReducer } from "./Reducers/UserReducers";
-import { orderCreateReducer, orderDetailsReducer } from "./Reducers/OrderReducers";
+import { orderCreateReducer, orderDetailsReducer, orderListReducer, orderPayReducer } from "./Reducers/OrderReducers";
 
+const initialState = {
+    token: localStorage.getItem('token'),
+    isAuthenticated: localStorage.getItem('token') ? true : false, // or just !!localStorage.getItem('token')
+    isLoading: false,
+    isRegistered: false
+ }
 
 const middleware = [thunk];
 
@@ -28,6 +34,7 @@ const store = configureStore({
     reducer: {
         productList: productListReducer,
         productDetails: productDetailsReducer,
+        productReviewCreate: productCreateReviewReducer,
         cart: cartReducer,
         userLogin: userLoginReducer,
         userRegister: userRegisterReducer,
@@ -35,6 +42,8 @@ const store = configureStore({
         userUpdateProfile: userUpdateProfileReducer,
         orderCreate: orderCreateReducer,
         orderDetails: orderDetailsReducer,
+        orderPay: orderPayReducer,
+        orderList: orderListReducer
     },
     initialState:{
         cart :{

@@ -1,23 +1,23 @@
 import React, { useEffect} from "react";
 import {Link } from "react-router-dom";
 import Rating from "./Rating";
-import Pagination from "./Pagination";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { listProduct } from "./../Redux/Actions/ProductActions";
 import Loading from "../LoadingError/Loading.js"
 import Message from "../LoadingError/Error.js";
 
-const Shop = () => {
+const Shop = (props) => {
     
+    const {keyword} = props
+
     const dispatch = useDispatch();
 
     const productList = useSelector((state) => state.productList);
     const {loading, error, products} = productList;
 
     useEffect(() => {
-        dispatch(listProduct());
-    }, [dispatch]);
+        dispatch(listProduct(keyword));
+    }, [dispatch, keyword]);
 
     return (
         <>

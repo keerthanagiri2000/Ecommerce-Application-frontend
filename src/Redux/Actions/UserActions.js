@@ -1,4 +1,5 @@
 import axios from "axios";
+import {API} from "./data.js";
 import {
   USER_LOGIN_FAIL,
   USER_LOGIN_REQUEST,
@@ -15,6 +16,7 @@ import {
   USER_UPDATE_PROFILE_FAIL,
   USER_UPDATE_PROFILE_REQUEST,
 } from "../Constants/UserConstants";
+import { ORDER_LIST_RESET } from "../Constants/OrderConstants.js";
 
 //LOGIN
 export const login = (email, password) => async (dispatch) => {
@@ -28,7 +30,7 @@ export const login = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `/api/users/login`,
+      `${API}/api/users/login`,
       { email, password },
       config
     );
@@ -51,6 +53,7 @@ export const logout = () => (dispatch) => {
   localStorage.removeItem("userInfo");
   dispatch({ type: USER_LOGOUT });
   dispatch({ type: USER_DETAILS_RESET });
+  dispatch({ type: ORDER_LIST_RESET });
   document.location.href = "/login";
 };
 
@@ -66,7 +69,7 @@ export const register = (name, email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `/api/users`,
+      `${API}/api/users`,
       { name, email, password },
       config
     );
@@ -98,7 +101,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/users/${id}`, config);
+    const { data } = await axios.get(`${API}/api/users/${id}`, config);
     dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     const message =
@@ -131,7 +134,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(`/api/users/profile`, user, config);
+    const { data } = await axios.put(`${API}/api/users/profile`, user, config);
     dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data });
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
 

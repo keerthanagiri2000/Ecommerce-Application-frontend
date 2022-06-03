@@ -13,6 +13,7 @@ import PlaceOrder from "./Screens/PlaceOrder";
 import Profile from "./Screens/Profile";
 import Shipping from "./Screens/Shipping";
 import SingleProduct from "./Screens/SingleProduct";
+import PrivateRouter from "./PrivateRouter";
 
 const App = () => {
   return (
@@ -21,16 +22,17 @@ const App = () => {
     <Router>
       <Routes>
        <Route exact path="/" element={<Home />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-        <Route path="/order/:id" element={<Order />} />
-        <Route path="payment" element={<Payment />}/>
+       <Route exact path="/search/:keyword" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/order/:id" element={<Order />} privateRoute={<PrivateRouter />} />
+        <Route path="/payment" element={<Payment />}/>
         <Route path="/products/:id" element={<SingleProduct />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/cart/:id" element={<Cart />} />
-        <Route path="placeorder" element={<PlaceOrder />} />
-        <Route path="profile" element={<Profile />} />
-        <Route path="shipping" element={<Shipping />} />
+        <Route path="/placeorder" element={<PlaceOrder />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="shipping" element={<Shipping />} privateRoute={<PrivateRouter />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
